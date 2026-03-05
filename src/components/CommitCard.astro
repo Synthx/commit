@@ -1,0 +1,28 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+
+interface Props {
+  code: CollectionEntry<"code">;
+}
+
+const { code } = Astro.props;
+const { Content } = await render(code);
+---
+
+<div class="faded relative w-full">
+  <div class="border-border w-full rounded-xl border p-6">
+    <Content />
+  </div>
+</div>
+
+<style>
+  .faded::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent 0%, var(--background) 90%);
+  }
+</style>

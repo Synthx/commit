@@ -1,0 +1,30 @@
+---
+import { SITE_NAME } from "@/configs/constants";
+import { getLangFromUrl } from "@/i18n/utils.ts";
+
+interface Props {
+  title: string | undefined;
+  description: string | undefined;
+}
+
+const { title, description } = Astro.props;
+const url = Astro.url;
+
+const canonicalURL = new URL(url.pathname, Astro.site);
+const socialImageURL = new URL("/images/banner.avif", url);
+const locale = getLangFromUrl(url);
+
+const pageTitle = title ? `${title} – ${SITE_NAME}` : SITE_NAME;
+---
+
+<title>{pageTitle}</title>
+<link rel="canonical" href={canonicalURL} />
+<meta property="og:image" content={socialImageURL} />
+<meta property="description" content={description} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="article" />
+<meta property="og:url" content={url} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content={locale} />
+<meta name="twitter:card" content="summary_large_image" />

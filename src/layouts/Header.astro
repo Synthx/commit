@@ -1,0 +1,25 @@
+---
+import LightIcon from "@/assets/icons/light.svg";
+import GithubIcon from "@/assets/icons/github.svg";
+import { GITHUB_LINK } from "@/configs/constants.ts";
+---
+
+<div class="fixed top-0 right-0 left-0">
+  <div class="mx-auto flex max-w-screen-2xl items-center justify-end gap-2 p-6">
+    <button class="icon-button" type="button" id="theme-button">
+      <LightIcon />
+    </button>
+    <a class="icon-button" rel="noreferrer" target="_blank" href={GITHUB_LINK}>
+      <GithubIcon />
+    </a>
+  </div>
+</div>
+
+<script>
+  import { toggleTheme } from "@/functions/theme.ts";
+
+  const themeButton = document.getElementById("theme-button");
+  themeButton?.addEventListener("click", () => {
+    toggleTheme();
+  });
+</script>

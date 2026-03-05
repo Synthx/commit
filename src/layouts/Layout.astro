@@ -1,0 +1,44 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import { SITE_NAME } from "@/configs/constants.ts";
+import { getLangFromUrl } from "@/i18n/utils.ts";
+import Header from "@/layouts/Header.astro";
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
+    <slot name="head">
+      <title>{SITE_NAME}</title>
+    </slot>
+  </head>
+  <body class="bg-background flex min-h-screen w-screen">
+    <Header />
+    <main class="flex w-full flex-1 flex-col">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<script>
+  import { setTheme } from "@/functions/theme.ts";
+
+  setTheme(document);
+
+  document.addEventListener("astro:before-swap", (event) => {
+    setTheme(event.newDocument);
+  });
+</script>

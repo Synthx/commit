@@ -1,0 +1,43 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Seo from "@/components/Seo.astro";
+import { getCollection } from "astro:content";
+import { getRandomItem } from "@/functions/list.ts";
+import CommitCard from "@/components/CommitCard.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils.ts";
+
+const codes = await getCollection("code");
+const randomFeaturedCode = getRandomItem(codes);
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout>
+  <Seo
+    slot="head"
+    title="The Graveyard of Disastrous Commits"
+    description={t("description")}
+  />
+  <div
+    class="screen flex w-full flex-1 flex-col items-center justify-center gap-10"
+  >
+    <h1
+      class="text-foreground text-center text-6xl leading-none font-extrabold uppercase md:text-8xl"
+    >
+      Code. Review. Cry.
+    </h1>
+    <h2
+      class="text-muted-foreground text-center text-lg font-normal md:text-xl"
+    >
+      {t("description")}
+    </h2>
+    {
+      randomFeaturedCode && (
+        <div class="mx-auto w-full md:max-w-3/4">
+          <CommitCard code={randomFeaturedCode} />
+        </div>
+      )
+    }
+  </div>
+</Layout>
