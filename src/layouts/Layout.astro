@@ -4,6 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import { SITE_NAME } from "@/configs/constants.ts";
 import { getLangFromUrl } from "@/i18n/utils.ts";
 import Header from "@/layouts/Header.astro";
+import { Font } from "astro:assets";
 
 const lang = getLangFromUrl(Astro.url);
 ---
@@ -21,11 +22,13 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <ClientRouter />
+    <Font cssVariable="--font-noto" preload />
+    <Font cssVariable="--font-jetbrains-mono" />
     <slot name="head">
       <title>{SITE_NAME}</title>
     </slot>
   </head>
-  <body class="bg-background flex min-h-screen w-screen">
+  <body class="bg-background font-body flex min-h-screen w-screen">
     <Header />
     <main class="flex w-full flex-1 flex-col">
       <slot />

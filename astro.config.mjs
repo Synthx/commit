@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -12,6 +12,23 @@ export default defineConfig({
   adapter: netlify(),
   vite: {
     plugins: [tailwindcss()],
+  },
+  experimental: {
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: "Noto Sans",
+        cssVariable: "--font-noto",
+        fallbacks: ["sans-serif"],
+      },
+      {
+        provider: fontProviders.google(),
+        name: "JetBrains Mono",
+        cssVariable: "--font-jetbrains-mono",
+        subsets: ["latin", "latin-ext"],
+        fallbacks: ["ui-monospace", "monospace"],
+      },
+    ],
   },
   markdown: {
     shikiConfig: {

@@ -1,13 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Seo from "@/components/Seo.astro";
-import { getCollection } from "astro:content";
-import { getRandomItem } from "@/functions/list.ts";
-import CommitCard from "@/components/CommitCard.astro";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils.ts";
-
-const codes = await getCollection("code");
-const randomFeaturedCode = getRandomItem(codes);
+import RandomCodeCard from "@/components/RandomCodeCard.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -32,12 +27,8 @@ const t = useTranslations(lang);
     >
       {t("description")}
     </h2>
-    {
-      randomFeaturedCode && (
-        <div class="mx-auto w-full md:max-w-3/4">
-          <CommitCard code={randomFeaturedCode} />
-        </div>
-      )
-    }
+    <div class="mx-auto w-full md:max-w-3/4">
+      <RandomCodeCard />
+    </div>
   </div>
 </Layout>

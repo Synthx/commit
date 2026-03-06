@@ -1,0 +1,10 @@
+---
+import { getCollection } from "astro:content";
+import { getRandomItem } from "@/functions/list.ts";
+import CommitCard from "@/components/CommitCard.astro";
+
+const codes = await getCollection("code");
+const randomCode = getRandomItem(codes);
+---
+
+{randomCode && <CommitCard code={randomCode} />}

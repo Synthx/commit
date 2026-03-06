@@ -1,0 +1,21 @@
+---
+import LightIcon from "@/assets/icons/light.svg";
+---
+
+<button
+  aria-label="Toggle theme mode"
+  class="icon-button"
+  type="button"
+  id="theme-button"
+>
+  <LightIcon />
+</button>
+
+<script>
+  import { toggleTheme } from "@/functions/theme.ts";
+
+  const themeButton = document.getElementById("theme-button");
+  themeButton?.addEventListener("click", () => {
+    toggleTheme();
+  });
+</script>

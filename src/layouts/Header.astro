@@ -1,25 +1,36 @@
 ---
-import LightIcon from "@/assets/icons/light.svg";
+import Logo from "@/assets/logo.svg";
 import GithubIcon from "@/assets/icons/github.svg";
 import { GITHUB_LINK } from "@/configs/constants.ts";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { defaultLang } from "@/i18n/ui.ts";
+import ThemeButton from "@/components/ThemeButton.astro";
 ---
 
-<div class="fixed top-0 right-0 left-0">
-  <div class="mx-auto flex max-w-screen-2xl items-center justify-end gap-2 p-6">
-    <button class="icon-button" type="button" id="theme-button">
-      <LightIcon />
-    </button>
-    <a class="icon-button" rel="noreferrer" target="_blank" href={GITHUB_LINK}>
-      <GithubIcon />
-    </a>
+<header class="fixed top-0 right-0 left-0">
+  <div
+    class="mx-auto flex max-w-screen-2xl items-center justify-between gap-6 p-6"
+  >
+    <div class="flex items-center gap-2">
+      <a
+        aria-label="View source code on Github"
+        class="icon-button"
+        href={getRelativeLocaleUrl(defaultLang, "")}
+      >
+        <Logo />
+      </a>
+    </div>
+    <div class="flex items-center gap-2">
+      <ThemeButton />
+      <a
+        aria-label="View source code on Github"
+        class="icon-button"
+        rel="noreferrer"
+        target="_blank"
+        href={GITHUB_LINK}
+      >
+        <GithubIcon />
+      </a>
+    </div>
   </div>
-</div>
-
-<script>
-  import { toggleTheme } from "@/functions/theme.ts";
-
-  const themeButton = document.getElementById("theme-button");
-  themeButton?.addEventListener("click", () => {
-    toggleTheme();
-  });
-</script>
+</header>
